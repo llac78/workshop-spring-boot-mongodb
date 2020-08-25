@@ -42,5 +42,8 @@ public class Configuracao implements CommandLineRunner {
 		Post p2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Estou na Europa",  new AutorDTO(u1));
 		
 		postRepositorio.saveAll(Arrays.asList(p1, p2));
+		
+		u1.getPosts().addAll(Arrays.asList(p1, p2));
+		usuarioRepositorio.save(u1);
 	}
 }
