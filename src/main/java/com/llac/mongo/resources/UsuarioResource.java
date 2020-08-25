@@ -1,6 +1,7 @@
 package com.llac.mongo.resources;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.llac.mongo.domain.entities.Usuario;
+import com.llac.mongo.dto.UsuarioDTO;
 import com.llac.mongo.services.UsuarioService;
 
 @RestController
@@ -16,11 +18,14 @@ import com.llac.mongo.services.UsuarioService;
 public class UsuarioResource {
 	
 	@Autowired
-	private UsuarioService usuarioServico;
+	private UsuarioService usuarioService;
 
 	@GetMapping
-	public ResponseEntity<List<Usuario>> listar(){
+	public ResponseEntity<List<UsuarioDTO>> listar(){
 		
-		return ResponseEntity.ok().body(usuarioServico.listar());
+		List<Usuario> usuarios = usuarioService.listar();
+		List<UsuarioDTO> dtos = usuarios.stream().map(usuarioDTO -> new UsuarioDTO(usuarioDTO)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(dtos);
 	}
 }
