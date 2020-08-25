@@ -25,6 +25,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario buscarPorId(String id) {
+		
 		Optional<Usuario> usuario = usuarioRepositorio.findById(id);
 		
 		return usuario.orElseThrow(() -> new ObjetoNaoEncontradoException("Objeto não encontrado no DB"));
@@ -34,6 +35,11 @@ public class UsuarioService {
 		return usuarioRepositorio.insert(usuario);
 	}
 	
+	public void deletar(String id) {
+		buscarPorId(id);
+		usuarioRepositorio.deleteById(id);
+	}
+
 	public Usuario fromDTO(UsuarioDTO usuarioDTO) {
 		return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail());
 	}

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,4 +53,13 @@ public class UsuarioResource {
 		
 		return ResponseEntity.created(uri).build(); //created retorna o código 201 (quando um novo recurso é criado)
 	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deletar(@PathVariable String id){
+		
+		usuarioService.deletar(id);;
+		
+		return ResponseEntity.noContent().build(); // quando a operação não tem que retornar nada, a resposta é com o código 204
+	}
+
 }
