@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.llac.mongo.domain.entities.Post;
 import com.llac.mongo.domain.entities.Usuario;
 import com.llac.mongo.dto.UsuarioDTO;
 import com.llac.mongo.services.UsuarioService;
@@ -73,5 +74,11 @@ public class UsuarioResource {
 		return ResponseEntity.noContent().build(); 
 	}
 
-
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Post>> listarPosts(@PathVariable String id){
+		
+		Usuario usuario = usuarioService.buscarPorId(id);
+		
+		return ResponseEntity.ok().body(usuario.getPosts());
+	}
 }
