@@ -1,12 +1,15 @@
 package com.llac.mongo.domain.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.llac.mongo.dto.AutorDTO;
+import com.llac.mongo.dto.ComentarioDTO;
 
 @Document
 public class Post implements Serializable {
@@ -20,6 +23,8 @@ public class Post implements Serializable {
 	private String corpo;
 	
 	private AutorDTO autorDTO;
+	
+	private List<ComentarioDTO> comentarios = new ArrayList<>();
 	
 	public Post() {
 	}
@@ -62,6 +67,10 @@ public class Post implements Serializable {
 	}
 	public void setAutor(AutorDTO autor) {
 		this.autorDTO = autor;
+	}
+
+	public List<ComentarioDTO> getComentarios() {
+		return comentarios;
 	}
 
 	@Override
