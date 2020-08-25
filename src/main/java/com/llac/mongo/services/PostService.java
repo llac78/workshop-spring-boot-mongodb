@@ -1,5 +1,6 @@
 package com.llac.mongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,7 @@ public class PostService {
 		return post.orElseThrow(() -> new ObjetoNaoEncontradoException("Objeto não encontrado no DB"));
 	}
 	
-	
+	public List<Post> findByTitle(String texto){
+		return postRepositorio.findByTitleContainingIgnoreCase(texto);
+	}
 }
