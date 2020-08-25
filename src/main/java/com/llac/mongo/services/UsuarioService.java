@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.llac.mongo.domain.entities.Usuario;
+import com.llac.mongo.dto.UsuarioDTO;
 import com.llac.mongo.repository.UsuarioRepositorio;
 import com.llac.mongo.services.exceptions.ObjetoNaoEncontradoException;
 
@@ -27,6 +28,14 @@ public class UsuarioService {
 		Optional<Usuario> usuario = usuarioRepositorio.findById(id);
 		
 		return usuario.orElseThrow(() -> new ObjetoNaoEncontradoException("Objeto não encontrado no DB"));
+	}
+	
+	public Usuario inserir(Usuario usuario) {
+		return usuarioRepositorio.insert(usuario);
+	}
+	
+	public Usuario fromDTO(UsuarioDTO usuarioDTO) {
+		return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail());
 	}
 
 }
