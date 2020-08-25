@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.llac.mongo.domain.entities.Post;
 import com.llac.mongo.domain.entities.Usuario;
+import com.llac.mongo.dto.AutorDTO;
 import com.llac.mongo.repository.PostRepositorio;
 import com.llac.mongo.repository.UsuarioRepositorio;
 
@@ -35,11 +36,11 @@ public class Configuracao implements CommandLineRunner {
 		Usuario u2 = new Usuario(null, "Alex Green", "alex@gmail.com");
 		Usuario u3 = new Usuario(null, "Bob Grey", "bob@gmail.com");
 		
-		
-		Post p1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Indo visitar a Europa", u1);
-		Post p2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Estou na Europa", u1);
-		
 		usuarioRepositorio.saveAll(Arrays.asList(u1, u2, u3));
+		
+		Post p1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Indo visitar a Europa", new AutorDTO(u1));
+		Post p2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Estou na Europa",  new AutorDTO(u1));
+		
 		postRepositorio.saveAll(Arrays.asList(p1, p2));
 	}
 }
