@@ -1,5 +1,6 @@
 package com.llac.mongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +25,11 @@ public class PostService {
 	}
 	
 	public List<Post> findByTitle(String texto){
-//		return postRepositorio.findByTitleContainingIgnoreCase(texto);
-		
 		return postRepositorio.findByTitle(texto);
+	}
+	
+	public List<Post> fullSearch(String texto, Date minDate, Date maxDate) {
+		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+		return postRepositorio.fullSearch(texto, minDate, maxDate);
 	}
 }

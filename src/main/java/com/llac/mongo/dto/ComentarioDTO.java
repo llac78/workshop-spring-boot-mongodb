@@ -8,16 +8,16 @@ public class ComentarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String texto;
-	private Date data;
+	private Date date;
 	private AutorDTO autorDTO;
 	
 	public ComentarioDTO() {
 	}
 
-	public ComentarioDTO(String texto, Date data, AutorDTO autorDTO) {
+	public ComentarioDTO(String texto, Date date, AutorDTO autorDTO) {
 		super();
 		this.texto = texto;
-		this.data = data;
+		this.date = date;
 		this.autorDTO = autorDTO;
 	}
 
@@ -29,12 +29,12 @@ public class ComentarioDTO implements Serializable {
 		this.texto = texto;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public AutorDTO getAutorDTO() {
